@@ -4,91 +4,63 @@
 //     .then(res => res.json())
 //     .then(json => console.log(json));
 // });
-const railsBackend = 'http://localhost:3000/users'
 const spinUrl = 'https://web.spin.pm/api/gbfs/v1/denver/free_bike_status'
 const birdUrl = 'https://api.bird.co/bird/nearby?latitude=39.766271&longitude=-104.951056&radius=1000'
 const lyftUrl = ''
 const limeUrl = ''
 const jumpUrl = 'https://den.jumpbikes.com/opendata/free_bike_status.json'
 
-// html elements
-const spinButton = document.querySelector('.spinSwitch')
-const birdButton = document.querySelector('#birdSwitch')
-const jumpButton = document.querySelector('#jumpSwitch')
-const dropdown = document.querySelector('.dropdown-content')
-const submit = document.querySelector('#login')
+let spinScooters
+getSpinScooter(spinUrl)
+let jump
+getJumpBike(jumpUrl)
+let birdData
+getBird()
 
 
-// let spinScooters
-// getSpinScooter(spinUrl)
-// let jump
-// getJumpBike(jumpUrl)
-// let birdData
-// getBird()
-// let users = []
-// getUserInfo(railsBackend)
+function getSpinScooter(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(result => getSpinArray(result))
+    .catch(error => console.error(error))
+}
 
+function getSpinArray(result){
+ spinScooters = result.data.bikes
+ console.log(spinScooters);
+}
+function getJumpBike(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(result => getJumpArray(result))
+    .catch(error => console.error(error))
+}
 
-// function getUserInfo(url) {
-//   fetch(url)
-//     .then(response => response.json())
-//     .then(result => displayInfo(result))
-//     .catch(error => console.error(error))
-// }
+function getJumpArray(result){
+ jump = result.data.bikes
+ console.log(jump)
+}
 
-// function displayInfo(result) {
-//   console.log(result)
-//   result.forEach(function(person){
-//     users.push(person)
-//     const a = document.createElement('a')
-//     a.textContent = `${person.first_name} ${person.last_name}`
-//     dropdown.appendChild(a)
-//   })
-// }
-
-// function getSpinScooter(url) {
-//   fetch(url)
-//     .then(response => response.json())
-//     .then(result => getSpinArray(result))
-//     .catch(error => console.error(error))
-// }
-
-// function getSpinArray(result){
-//  spinScooters = result.data.bikes
-//  console.log(spinScooters);
-// }
-// function getJumpBike(url) {
-//   fetch(url)
-//     .then(response => response.json())
-//     .then(result => getJumpArray(result))
-//     .catch(error => console.error(error))
-// }
-
-// function getJumpArray(result){
-//  jump = result.data.bikes
-//  console.log(jump)
-// }
-
-// function getBird() {
-//   fetch(birdUrl, {
-//     "method": "GET",
-//     "headers": {
-//       "Authorization": "BIRD eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjY4YzdjOTk4LTQzM2MtNDQyOS1iODVhLWJhYWIwNzgwOGY5NCIsImRldmljZV9pZCI6ImM2OWZkMTc0LTlmMzEtNDJjOS05M2EyLTU4ODU5OWI5MGFhMCIsImV4cCI6MTU5MjMzNzg0M30.jLHY2vEIovsapo8iYKCpcU6Fv5HZxt9o172Onq7KTj8",
-//       "Device-id": "c69fd174-9f31-42c9-93a2-588599b90aa0",
-//       "App-Version": "4.24.5",
-//       "Location": "{\"latitude\":39.766271,\"longitude\":-104.951056,\"altitude\":500,\"accuracy\":100,\"speed\":-1,\"heading\":-1}"
-//     }})
-//     .then(function(response) {
-//       return response.json()
-//     })
-//     .then(function(result) {
-//       birdData = result["birds"]
-//       console.log(birdData)
-//     })
-//     .catch(function(err) {
-//       console.error(err)
-//     })
-//   }
+function getBird() {
+  fetch(birdUrl, {
+    "method": "GET",
+    "headers": {
+      "Authorization": "BIRD eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjY4YzdjOTk4LTQzM2MtNDQyOS1iODVhLWJhYWIwNzgwOGY5NCIsImRldmljZV9pZCI6ImM2OWZkMTc0LTlmMzEtNDJjOS05M2EyLTU4ODU5OWI5MGFhMCIsImV4cCI6MTU5MjMzNzg0M30.jLHY2vEIovsapo8iYKCpcU6Fv5HZxt9o172Onq7KTj8",
+      "Device-id": "c69fd174-9f31-42c9-93a2-588599b90aa0",
+      "App-Version": "4.24.5",
+      "Location": "{\"latitude\":39.766271,\"longitude\":-104.951056,\"altitude\":500,\"accuracy\":100,\"speed\":-1,\"heading\":-1}"
+    }})
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(result) {
+      birdData = result["birds"]
+      console.log(birdData)
+    })
+    .catch(function(err) {
+      console.error(err)
+    })
+  }
 
 
 
@@ -149,15 +121,20 @@ function geocode(latlng){
 let spinCheckBox = document.querySelector(".spinCheck")
 let birdCheckBox = document.querySelector(".birdCheck")
 let jumpCheckBox = document.querySelector(".jumpCheck")
+let jumpIcon = document.querySelector(".jump-icon").style
+let spinIcon = document.querySelector(".spin-icon").style
+let birdIcon = document.querySelector(".bird-icon").style
 
 
 // checkbox functions for each company
 function spinCheck() {
   if (spinCheckBox.checked === false) {
     spinCheckBox.checked = true
+    spinIcon.display = 'block'
     plotSpinScooters()
   } else  {
     spinCheckBox.checked = false
+    spinIcon.display = 'none'
     removeSpinMarkers()
   }
 }
@@ -165,9 +142,11 @@ function spinCheck() {
 function birdCheck() {
   if (birdCheckBox.checked === false) {
     birdCheckBox.checked = true
+    birdIcon.display = 'block'
     plotBirdScooters()
   } else {
     birdCheckBox.checked = false
+    birdIcon.display = 'none'
     removeBirdScooters()
   }
 }
@@ -175,9 +154,11 @@ function birdCheck() {
 function jumpCheck() {
   if (jumpCheckBox.checked === false) {
     jumpCheckBox.checked = true
+    jumpIcon.display = 'block'
     plotJumpBikes()
   } else {
     jumpCheckBox.checked = false
+    jumpIcon.display = 'none'
     removeJumpBikes()
   }
 }
@@ -374,66 +355,66 @@ const spinScooters = [
         "is_disabled": 0
       }]
 
-const jump = [{
-        "bike_id": "bike_90722",
-        "name": "19401",
-        "lon": -104.986985,
-        "lat": 39.75803833333333,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "48%",
-        "jump_vehicle_type": "bike"
-      },
-      {
-        "bike_id": "bike_184853",
-        "name": "32814",
-        "lon": -104.990265,
-        "lat": 39.74614666666667,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "35%",
-        "jump_vehicle_type": "bike"
-      },
-      {
-        "bike_id": "bike_90709",
-        "name": "19403",
-        "lon": -105.011435,
-        "lat": 39.78386833333333,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "83%",
-        "jump_vehicle_type": "bike"
-      },
-      {
-        "bike_id": "bike_90628",
-        "name": "18923",
-        "lon": -104.99449333333334,
-        "lat": 39.743338333333334,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "63%",
-        "jump_vehicle_type": "bike"
-      },
-      {
-        "bike_id": "bike_184401",
-        "name": "08682",
-        "lon": -104.97072333333334,
-        "lat": 39.745691666666666,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "31%",
-        "jump_vehicle_type": "bike"
-      },
-      {
-        "bike_id": "bike_90657",
-        "name": "19429",
-        "lon": -104.99039333333333,
-        "lat": 39.74109166666667,
-        "is_reserved": 0,
-        "is_disabled": 0,
-        "jump_ebike_battery_level": "83%",
-        "jump_vehicle_type": "bike"
-      }]
+// const jump = [{
+//         "bike_id": "bike_90722",
+//         "name": "19401",
+//         "lon": -104.986985,
+//         "lat": 39.75803833333333,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "48%",
+//         "jump_vehicle_type": "bike"
+//       },
+//       {
+//         "bike_id": "bike_184853",
+//         "name": "32814",
+//         "lon": -104.990265,
+//         "lat": 39.74614666666667,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "35%",
+//         "jump_vehicle_type": "bike"
+//       },
+//       {
+//         "bike_id": "bike_90709",
+//         "name": "19403",
+//         "lon": -105.011435,
+//         "lat": 39.78386833333333,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "83%",
+//         "jump_vehicle_type": "bike"
+//       },
+//       {
+//         "bike_id": "bike_90628",
+//         "name": "18923",
+//         "lon": -104.99449333333334,
+//         "lat": 39.743338333333334,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "63%",
+//         "jump_vehicle_type": "bike"
+//       },
+//       {
+//         "bike_id": "bike_184401",
+//         "name": "08682",
+//         "lon": -104.97072333333334,
+//         "lat": 39.745691666666666,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "31%",
+//         "jump_vehicle_type": "bike"
+//       },
+//       {
+//         "bike_id": "bike_90657",
+//         "name": "19429",
+//         "lon": -104.99039333333333,
+//         "lat": 39.74109166666667,
+//         "is_reserved": 0,
+//         "is_disabled": 0,
+//         "jump_ebike_battery_level": "83%",
+//         "jump_vehicle_type": "bike"
+//       }]
 
 const birdData = [
       {

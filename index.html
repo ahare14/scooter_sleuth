@@ -4,26 +4,35 @@
     <meta charset='UTF-8'/>
     <title>Scooter Sleuth V2</title>
     <link rel='stylesheet' href='styles.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class='menu-container'>
       <div class='menu'>
+        <div class='title'>
+          <h1>Scooter Sleuth</h1>
+        </div>
+        <div class='time'>
           <p>Time: <span id="datetime"></span></p>
+        </div>
       </div>
     </div>
     <div class='header-container'>
       <div class='header'>
-        <div class='logo'>
+        <div class='scooterButtons'>
           <input class="spinCheck" type="checkbox">
-          <button onclick="spinCheck()" >Spin</button>
+          <button class="myButtonSpin" onclick="spinCheck()" >Spin</button>
+          <img class="spin-icon" src='https://i.imgur.com/8rpLmdm.png'/>
         </div>
-        <div class='logo'>
+        <div class='scooterButtons'>
           <input class="birdCheck" type="checkbox"/>
-          <button onclick="birdCheck()" >Bird</button>
+          <button class="myButtonBird" onclick="birdCheck()" >Bird</button>
+          <img class="bird-icon" src='https://i.imgur.com/vjwfGlu.png'/>
         </div>
-        <div class='logo'>
+        <div class='scooterButtons'>
           <input class="jumpCheck" type="checkbox"/>
-          <button onclick="jumpCheck()" >Jump</button>
+          <button class="myButtonJump" onclick="jumpCheck()" >Jump</button>
+          <img class="jump-icon" src='https://i.imgur.com/2Z46Omm.png'/>
         </div>
       </div>
     </div>
@@ -31,9 +40,7 @@
       <div id="map"></div>
     </div>
     <div class='footer'>
-      <div class='footer-item footer-one'></div>
-      <div class='footer-item footer-two'></div>
-      <div class='footer-item footer-three'></div>
+      <h3>Click a scooter company to activate scooter locations</h3>
     </div>
     <script src="./app.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJwIQJhwFabrSJmjbJdsXoJtRh92-TW0E&callback=initMap" ></script>
