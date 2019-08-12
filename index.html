@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>Scooter Sleuth V2</title>
+    <link rel='stylesheet' href='styles.css'/>
+  </head>
+  <body>
+    <div class='menu-container'>
+      <div class='menu'>
+          <p>Time: <span id="datetime"></span></p>
+      </div>
+    </div>
+    <div class='header-container'>
+      <div class='header'>
+        <div class='logo'>
+          <input class="spinCheck" type="checkbox">
+          <button onclick="spinCheck()" >Spin</button>
+        </div>
+        <div class='logo'>
+          <input class="birdCheck" type="checkbox"/>
+          <button onclick="birdCheck()" >Bird</button>
+        </div>
+        <div class='logo'>
+          <input class="jumpCheck" type="checkbox"/>
+          <button onclick="jumpCheck()" >Jump</button>
+        </div>
+      </div>
+    </div>
+    <div class="photo-grid">
+      <div id="map"></div>
+    </div>
+    <div class='footer'>
+      <div class='footer-item footer-one'></div>
+      <div class='footer-item footer-two'></div>
+      <div class='footer-item footer-three'></div>
+    </div>
+    <script src="./app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJwIQJhwFabrSJmjbJdsXoJtRh92-TW0E&callback=initMap" ></script>
+  </body>
+</html>
