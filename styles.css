@@ -71,7 +71,7 @@
 }
 
 #map {
-  height: 78vh;
+  max-height: 100%;
   width: 100%;
   align-self: center;
   border: 1px solid black;

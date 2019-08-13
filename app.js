@@ -1,5 +1,5 @@
 const spinUrl = 'https://web.spin.pm/api/gbfs/v1/denver/free_bike_status'
-const birdUrl = 'https://api.bird.co/bird/nearby?latitude=39.766271&longitude=-104.951056&radius=1000'
+const birdUrl = 'https://api.birdapp.com/bird/nearby?latitude=39.766271&longitude=-104.951056&radius=1000'
 const lyftUrl = ''
 const limeUrl = ''
 const jumpUrl = 'https://den.jumpbikes.com/opendata/free_bike_status.json'
@@ -39,9 +39,9 @@ function getBird() {
   fetch(birdUrl, {
     "method": "GET",
     "headers": {
-      "Authorization": "BIRD eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6IjY4YzdjOTk4LTQzM2MtNDQyOS1iODVhLWJhYWIwNzgwOGY5NCIsImRldmljZV9pZCI6ImM2OWZkMTc0LTlmMzEtNDJjOS05M2EyLTU4ODU5OWI5MGFhMCIsImV4cCI6MTU5MjMzNzg0M30.jLHY2vEIovsapo8iYKCpcU6Fv5HZxt9o172Onq7KTj8",
-      "Device-id": "c69fd174-9f31-42c9-93a2-588599b90aa0",
-      "App-Version": "4.24.5",
+      "Authorization": "BIRD eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBVVRIIiwidXNlcl9pZCI6ImRmNjEyMGRlLTJiZmUtNGM3NC04NDQ0LTNmYWM4YWYyNmFkOSIsImRldmljZV9pZCI6Ijc0ZmRiZWFhLWRhNmEtNGVjYi04OGJiLTBkOTYzYjk4NzFjYSIsImV4cCI6MTU5NzI1NDY5Nn0.J28q6XQsagW4ox4rjcWRWDKggUIwRQx5rytaUPTJ-1Y",
+      "Device-id": "74fdbeaa-da6a-4ecb-88bb-0d963b9871ca",
+      "App-Version": "4.41.0",
       "Location": "{\"latitude\":39.766271,\"longitude\":-104.951056,\"altitude\":500,\"accuracy\":100,\"speed\":-1,\"heading\":-1}"
     }})
     .then(function(response) {
@@ -176,8 +176,8 @@ function plotSpinScooters() {
       `<p>coordinates: latitude: ${scooter.lat}, longitude: ${scooter.lon}</p>`+
       `<p>Address: ${address}</p>`+
       `<p>${scooter.bike_id}</p>`+
-      '<p><b>Cost</b>: $1 per 30 mins </p>'+
-      '<button id="link" onclick="loadContent()"> Go For a Ride! </button>'+
+      '<p><b>Cost</b>: $1 to start $.15 cents per min </p>'+
+      `<input type="button" onclick="location.href='https://spinpm.wpengine.com';" value="Go For a Ride!" />`+
       '</div>'
 
     let spinInfowindow = new google.maps.InfoWindow({
@@ -220,7 +220,7 @@ function plotBirdScooters() {
       `<p>Address: ${address}</p>`+
       `<p>${scooter.id}</p>`+
       '<p><b>Cost</b>: $1 to Start $.25 per min </p>'+
-      '<button id="link" onclick="loadContent()"> Go For a Ride! </button>'+
+      `<input type="button" onclick="location.href='https://www.bird.co/';" value="Go For a Ride!" />`+
       '</div>'
     let birdInfowindow = new google.maps.InfoWindow({
       content: contentStringB,
@@ -259,7 +259,7 @@ function plotJumpBikes() {
       `<p>Address: latitude: ${bike.lat}, longitude: ${bike.lon}</p>`+
       `<p>${bike.bike_id}</p>`+
       '<p><b>Cost</b>: $.25 per min </p>'+
-      `<button id="link" onclick="loadContent()"> Go For a Ride! </button>`+
+      `<input type="button" onclick="location.href='https://jump.com/';" value="Go For a Ride!" />`+
       '</div>'
     let jumpInfowindow = new google.maps.InfoWindow({
       content: contentStringJ,
