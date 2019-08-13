@@ -103,7 +103,8 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+  font-family:Arial;
+  color: black;
 	font-size:17px;
 	padding:16px 31px;
 	text-decoration:none;
@@ -117,7 +118,7 @@
 	top:1px;
 }
 .myButtonBird {
-	background-color:lightblue;
+  background-color:lightblue;
 	-moz-border-radius:28px;
 	-webkit-border-radius:28px;
 	border-radius:28px;
@@ -126,6 +127,7 @@
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
+  color: black;
 	font-size:17px;
 	padding:16px 31px;
 	text-decoration:none;
@@ -139,7 +141,7 @@
 	top:1px;
 }
 .myButtonJump {
-	background-color: rgb(236, 27, 27);
+  background-color: rgb(236, 27, 27);
 	-moz-border-radius:28px;
 	-webkit-border-radius:28px;
 	border-radius:28px;
@@ -148,6 +150,7 @@
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
+  color: black;
 	font-size:17px;
 	padding:16px 31px;
 	text-decoration:none;
