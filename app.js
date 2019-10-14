@@ -4,10 +4,11 @@ const lyftUrl = ''
 const limeUrl = ''
 // const jumpUrl = 'https://den.jumpbikes.com/opendata/free_bike_status.json'
 
+
 let spinScooters
 getSpinScooter(spinUrl)
-let jump
-getJumpBike(jumpUrl)
+// let jump
+// getJumpBike(jumpUrl)
 let birdData
 getBird()
 
@@ -63,6 +64,7 @@ function loadMap() {
   navigator.geolocation.getCurrentPosition(function(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
+    console.log('this is the loadmap function', latitude)
     initMap(latitude, longitude)
     startTime()
   })
@@ -119,8 +121,8 @@ function geocode(latlng){
 // checkbox for each company
 let spinCheckBox = document.querySelector(".spinCheck")
 let birdCheckBox = document.querySelector(".birdCheck")
-let jumpCheckBox = document.querySelector(".jumpCheck")
-let jumpIcon = document.querySelector(".jump-icon").style
+// let jumpCheckBox = document.querySelector(".jumpCheck")
+// let jumpIcon = document.querySelector(".jump-icon").style
 let spinIcon = document.querySelector(".spin-icon").style
 let birdIcon = document.querySelector(".bird-icon").style
 
@@ -187,7 +189,7 @@ function plotSpinScooters() {
     markerS = new google.maps.Marker({
       position: new google.maps.LatLng(scooter.lat, scooter.lon),
       map: map,
-      icon: 'https://i.imgur.com/8rpLmdm.png',
+      icon: "./spin_icon.png",
       animation: google.maps.Animation.DROP,
       title: 'Spin Scooter Info'
     })
@@ -229,7 +231,7 @@ function plotBirdScooters() {
     markerB = new google.maps.Marker({
       position: new google.maps.LatLng(scooter.location.latitude, scooter.location.longitude),
       map: map,
-      icon: 'https://i.imgur.com/vjwfGlu.png',
+      icon: "./bird_icon.png",
       animation: google.maps.Animation.DROP
     })
     birdMarkers.push(markerB)
@@ -249,41 +251,41 @@ function removeBirdScooters() {
 }
 
 // jump bike ploter
-let jumpMarkers = []
-function plotJumpBikes() {
-  jump.forEach(function(bike){
-    let markerJ
-    let contentStringJ = '<div id="content">'+
-      '<h1 id="firstHeading" class="firstHeading">Jump</h1>'+
-      '<div id ="bodyContent">'+
-      `<p>Address: latitude: ${bike.lat}, longitude: ${bike.lon}</p>`+
-      `<p>${bike.bike_id}</p>`+
-      '<p><b>Cost</b>: $.25 per min </p>'+
-      `<input type="button" onclick="location.href='https://jump.com/';" value="Go For a Ride!" />`+
-      '</div>'
-    let jumpInfowindow = new google.maps.InfoWindow({
-      content: contentStringJ,
-      maxWidth: 200
-    })
-    markerJ = new google.maps.Marker({
-      position: new google.maps.LatLng(bike.lat, bike.lon),
-      map: map,
-      icon: 'https://i.imgur.com/2Z46Omm.png',
-      animation: google.maps.Animation.DROP
-    })
-    jumpMarkers.push(markerJ)
-    markerJ.addListener('click', function() {
-      jumpInfowindow.open(map, markerJ)
-    })
-  })
-}
+// let jumpMarkers = []
+// function plotJumpBikes() {
+//   jump.forEach(function(bike){
+//     let markerJ
+//     let contentStringJ = '<div id="content">'+
+//       '<h1 id="firstHeading" class="firstHeading">Jump</h1>'+
+//       '<div id ="bodyContent">'+
+//       `<p>Address: latitude: ${bike.lat}, longitude: ${bike.lon}</p>`+
+//       `<p>${bike.bike_id}</p>`+
+//       '<p><b>Cost</b>: $.25 per min </p>'+
+//       `<input type="button" onclick="location.href='https://jump.com/';" value="Go For a Ride!" />`+
+//       '</div>'
+//     let jumpInfowindow = new google.maps.InfoWindow({
+//       content: contentStringJ,
+//       maxWidth: 200
+//     })
+//     markerJ = new google.maps.Marker({
+//       position: new google.maps.LatLng(bike.lat, bike.lon),
+//       map: map,
+//       icon: 'https://i.imgur.com/2Z46Omm.png',
+//       animation: google.maps.Animation.DROP
+//     })
+//     jumpMarkers.push(markerJ)
+//     markerJ.addListener('click', function() {
+//       jumpInfowindow.open(map, markerJ)
+//     })
+//   })
+// }
 
-function removeJumpBikes() {
-  jumpMarkers.forEach(function(markJ){
-    console.log('click')
-    markJ.setMap(null)
-    jumpMarkers = []
-  })
-}
+// function removeJumpBikes() {
+//   jumpMarkers.forEach(function(markJ){
+//     console.log('click')
+//     markJ.setMap(null)
+//     jumpMarkers = []
+//   })
+// }
 
 
