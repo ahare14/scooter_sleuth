@@ -2,7 +2,7 @@ const spinUrl = 'https://web.spin.pm/api/gbfs/v1/denver/free_bike_status'
 const birdUrl = 'https://api.birdapp.com/bird/nearby?latitude=39.766271&longitude=-104.951056&radius=1000'
 const lyftUrl = ''
 const limeUrl = ''
-const jumpUrl = 'https://den.jumpbikes.com/opendata/free_bike_status.json'
+// const jumpUrl = 'https://den.jumpbikes.com/opendata/free_bike_status.json'
 
 let spinScooters
 getSpinScooter(spinUrl)
